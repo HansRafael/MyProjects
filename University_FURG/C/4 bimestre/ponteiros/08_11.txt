@@ -1,0 +1,10 @@
+//ponteiros sao usados para, literalmente, apontar para um informação da memoória. EX: eu guardo uma informacao na memória e ao inves de declara como um INT, eu irei apontar para o ESPAÇO(localizao)
+em que ela está alocada na memória
+
+// int *<nomeDoPonteiro>;
+// int* p = &a;
+
+//o '&' serve para apontar para um lugar específico do ponteiro.
+
+a funcao malloc(<numeroDeBytes) guarda um numero de bytes
+

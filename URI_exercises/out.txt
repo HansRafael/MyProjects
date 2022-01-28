@@ -1,0 +1,54 @@
+Key=  name
+Blitzen 50 180 1.12
+Comet 50 121 1.21
+Cupid 50 107 1.45
+Dancer 10 131 1.14
+Dasher 10 121 1.12
+Dasher 10 121 1.98
+Dasherr 10 121 1.98
+Donner 30 106 1.23
+Prancer 7 142 1.36
+Rudolph 50 100 1.12
+Vixen 50 110 1.42
+Key=  height
+Blitzen 50 180 1.12
+Dasher 10 121 1.12
+Rudolph 50 100 1.12
+Dancer 10 131 1.14
+Comet 50 121 1.21
+Donner 30 106 1.23
+Prancer 7 142 1.36
+Vixen 50 110 1.42
+Cupid 50 107 1.45
+Dasher 10 121 1.98
+Dasherr 10 121 1.98
+Key=  age
+Rudolph 50 100 1.12
+Donner 30 106 1.23
+Cupid 50 107 1.45
+Vixen 50 110 1.42
+Dasher 10 121 1.12
+Comet 50 121 1.21
+Dasher 10 121 1.98
+Dasherr 10 121 1.98
+Dancer 10 131 1.14
+Prancer 7 142 1.36
+Blitzen 50 180 1.12
+Key=  weight
+Rudolph 50 100 1.12
+Cupid 50 107 1.45
+Vixen 50 110 1.42
+Comet 50 121 1.21
+Blitzen 50 180 1.12
+Donner 30 106 1.23
+Dasher 10 121 1.12
+Dasher 10 121 1.98
+Dasherr 10 121 1.98
+Dancer 10 131 1.14
+Prancer 7 142 1.36
+CENARIO {1}
+1 - Rudolph
+2 - Cupid
+3 - Vixen
+4 - Comet
+5 - Blitzen

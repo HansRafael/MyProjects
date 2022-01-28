@@ -1,0 +1,5 @@
+py 2-2727.py < test.txt > out.txt
+
+'<' para receber o arquivo de texto
+> para criar e escrever em cima
+>> para continuar escrevendo no mesmo arquivo

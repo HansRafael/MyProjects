@@ -1,0 +1,45 @@
+yarn init -y
+yarn add express
+yarn add @types/express -D
+yarn add typescript -D
+yarn tsc --init
+
+=> no aruiqvo tsconfig.json, mudar stric = false
+
+yarn add ts-node-dev -D
+=> no arquivo package.json criar
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts"
+  },
+
+yarn dev
+
+
+
+###  BANCO DE DADOS  ###
+########################
+
+postgress
+knex.js (keybuilder)
+typeORM
+
+yarn add typeorm reflect-metadata sqlite3
+
+### migrations ###
+histório de td q criamos no banco de dados (tabelas/dados)
+
+yarn typeorm migration:create -n CreateSettings
+yarn typeorm migration:run
+
+adcionar biblioteca p controlar o _id
+yarn add uuid
+yarn add @types/uuid -D
+
+yarn typeorm migration:create -n CreateUser
+yarn typeorm migration:create -n CreateMessages
+
+#####################################
+##########   WEBSCOKET ##############
+#####################################
+Servidor não precisar de uma request para
+dar um response, a conexão fica aberta o tempo inteiro (comunicação bidirecional)

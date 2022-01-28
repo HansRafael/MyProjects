@@ -1,0 +1,9 @@
+___________Websocket e socket.IO__________
+
+1) Socket: mecanismo de comunicacao, implementar cliente-servidor
+troca de mensagens entre eles
+
+2)websocket: em outras palavras, renderizar algo na pagina cliente, sem o 
+cliente clicar/pedir permissao
+
+npm install socket.io --save

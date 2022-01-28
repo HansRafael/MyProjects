@@ -1,0 +1,10 @@
+Como compilar
+1) Entrar no diretório pelo cmd..cd "Nome da pasta"
+2) Escrever gcc 'nome_do_arquivo.c' -o e.exe
+3) Executar no cmd e.exe
+
+printf("%2.f -- pega as primeiras casa decimais
+printf("%.4f -- quantas casas depois da virgula
+
+
+py main.py

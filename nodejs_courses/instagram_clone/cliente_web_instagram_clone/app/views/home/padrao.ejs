@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Instagram Clone - WEB</title>
+		
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
+		<!-- incluindo css -->
+		<link href="css/style.css" rel="stylesheet">
+
+		<script>
+			$(document).ready(function(){ //jQuery detects this state of readiness for you
+
+				function up_posts(){
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET","http://localhost:8080/api");
+				
+					//apos o carregamento, faz um novo teste
+					xhr.onload = function(){  //Execute a JavaScript immediately after a page has been loaded:
+						if(xhr.status === 200){
+							var data = $.parseJSON(xhr.responseText); //transforma a string em um objeto
+							
+							for(var i = 0; i < data.length; i ++){
+								
+								$('#container_timeline').append( //o append espera uma string, por isso n da p fazer uma lógica aqui dentro
+									'<div class="publicacao">'+
+										'<span class="titulo">' +
+											data[i].titulo +
+											'\nUsuário: ' +
+											data[i].name +
+											'</span>'+
+										'<button type="button" value="'+ data[i]._id + '" class="btn btn-default btn_remover_publicacao">X</button>' +
+										'<img src="http://localhost:8080/imagens/' + data[i].url_imagem +'" />' +
+										'<div class="comentarios" id="comentarios_'+ data[i]._id + '"></div>' +
+										'<div class="comentar">' +
+											'<input type="text" class="form-control input_comentario" id="postagem_'+ data[i]._id + '" placeholder="Adicione um comentário...">' +
+											'<button class="btn btn-default btn_postagem" value="'+ data[i]._id + '"type="button">Comentar</button>' +
+										'</div>' +
+									'</div>'
+								);
+
+								if(data[i].comentarios != undefined){
+									var comentarios = data[i].comentarios;
+									
+									for(var j = 0; j < comentarios.length; j++){
+										$('#comentarios_'+data[i]._id).append(
+											'<div class="txt_comentario">'+
+												'<button type="button" value="'+comentarios[j].id_comentario + '" class="btn btn-default btn_remover_comentario">X</button>' +
+												comentarios[j].comentario +  //percorendo o objeto comentarios, mais precisamente em 'comentario'
+											'</div>'
+										); //funcao celetora do query, para realizar um append dentro de comentarios, que esta dentro do conteiner time-line
+									}
+								}
+								
+							}
+
+							$('.btn_remover_publicacao').click(function(){
+								var _id = this.value;
+
+								var xhr = new XMLHttpRequest();
+								xhr.open('DELETE','http://localhost:8080/api/public/' + _id);
+								
+								xhr.onload = function(){
+									if(xhr.status === 200){
+										window.location.href = "/home"
+									} //armazena a resposta do servidor
+								}
+								
+								xhr.send(); //serve para o comentario ir junto com o req.body via json
+		
+
+							});
+							$('.btn_remover_comentario').click(function(){
+								var id_comentario = this.value;
+
+								var xhr = new XMLHttpRequest();
+								xhr.open('DELETE','http://localhost:8080/api/comentario/' + id_comentario);
+								
+								xhr.onload = function(){
+									if(xhr.status === 200){
+										window.location.href = "/home"
+									} //armazena a resposta do servidor
+								}
+								
+								xhr.send(); //serve para o comentario ir junto com o req.body via json
+		
+
+							});
+							//faz referencia ao elemento clicado no momento
+							$('.btn_postagem').click(function(){
+								var id = this.value;
+								var id_input_comentario = 'postagem_' + id
+								var comentario = $('#' + id_input_comentario).val();
+								
+								//fazer um request
+								var xhr = new XMLHttpRequest();
+								xhr.open('PUT','http://localhost:8080/api/' + id);
+								xhr.setRequestHeader('Content-Type','application/json');
+								
+								xhr.onload = function(){
+									if(xhr.status === 200){
+										window.location.href = "/home"
+									} //armazena a resposta do servidor
+								}
+								
+								xhr.send(JSON.stringify({comentario : comentario })); //serve para o comentario ir junto com o req.body via json
+							
+							});
+						}
+					}
+
+					xhr.send();
+
+				}
+
+				up_posts();
+
+				$('#btn_incluir').click(function(){
+					$('#container_timeline').hide();
+					$('#container_form').show();
+				});
+
+				$('#btn-cancelar-publicacao').click(function(){
+					$('#container_timeline').show();
+					$('#container_form').hide();
+					return false;
+				});
+
+				$('#btn-publicar').click(function(){
+					//criar um formData para armazenar o arquivo
+					var formData = new FormData();
+
+					
+					var arquivo = document.getElementById("arquivo").files[0];
+					var titulo = document.getElementById("titulo").value;
+					var name = document.getElementById("name").value;
+
+					formData.append("arquivo", arquivo);
+					formData.append("titulo", titulo);
+					formData.append("name", name);
+					//criar xmlhttprequest
+					var xhr = new XMLHttpRequest();
+
+					//verificar mudanças de estados. enviamos e precisamos receber
+					xhr.onreadystatechange = function(){
+						if(xhr.readyState == 4){ //verificar o estado em que o nosso objeto se encontra. 4== requisiçao completada
+							var resposta = xhr.responseText;
+							document.getElementById('mensagem').innerHTML = resposta;
+							window.location.href = "/home"
+						}
+					}
+
+					//fazer envio do request
+					xhr.open("POST","http://localhost:8080/api");  //p onde será o request. no casso na nsosa API
+					xhr.send(formData);
+				});
+
+			});
+		</script>
+
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="container-fluid">
+						<img alt="Instagram Clone - Versão WEB" src="images/logo2.jpg" class="logo2">
+						<img alt="Incluir" src="images/incluir.jpg" class="pull-right btn-incluir" id="btn_incluir">						
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="col-md-2"></div>
+			<div class="col-md-8" id="container_timeline"></div>
+			
+		</div>
+
+
+		<div class="container" style="display:none" id="container_form">
+			<div class="panel panel-default">
+
+			<div class="panel-heading"><h4>Publicar uma foto</h4></div>
+			
+			<div class="panel-body">
+				<div class="form-group">
+					<input type="file" name="arquivo" id="arquivo" class="form-control">
+				</div>
+
+				<div class="form-group">
+					<input type="text" name="name" id="name" class="form-control" placeholder="Nome do usuário" autocomplete="off">
+				</div>
+
+				<div class="form-group">
+					<input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" autocomplete="off">
+				</div>
+
+				<div class="form-group">
+					<button class="btn btn-success" id="btn-publicar">Publicar</button>
+					<button class="btn btn-danger" id="btn-cancelar-publicacao">Cancelar</button>
+				</div>
+				<div id="mensagem"></div>
+			</div>
+		</div>
+	</body>
+</html>

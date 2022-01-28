@@ -1,0 +1,5 @@
+*para testar a ordenação dos valores, colar no terminal:
+
+py mainTestOrdenacao.py <carros.txt> out.txt
+
+*irá criar um arquivo 'out.txt' (ou outro nome, só mudar) no mesmo diretório do main2.py

@@ -1,0 +1,4 @@
+Não identifiquei o motivo, mas, as vezes, ele só executa
+na segunda vez.Estava tentando fazer em C também, mas
+não conseguia inserir os dados no vetor Struct (vou deixar
+o arquivo em C também, mas apenas o de Python está funcoonando)

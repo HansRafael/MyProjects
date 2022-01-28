@@ -1,0 +1,21 @@
+1- criar diretório
+2- iniciar o npm init
+npm init
+
+3-
+npm install express@version --save
+4-
+npm install ejs --save
+5- 
+npm install consign --save
+6-
+npm install body-parser --save
+7-
+npm install express-validator --save
+
+
+"criar os diretorios:
+mkdir controllers
+mkdir models
+mkdir routes
+mkdir views
